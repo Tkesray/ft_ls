@@ -6,21 +6,37 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 12:52:35 by prastoin          #+#    #+#             */
-/*   Updated: 2019/01/11 15:13:15 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/01/11 15:44:57 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	printdbchar(char **tab)
+void	printdbchar(char **tab, int i)
 {
 	int	k;
 
 	k = -1;
-	while (tab[++k])
+	if (i == 0)
 	{
-		ft_putstr(tab[k]);
-		ft_putchar('\n');
+		while (tab[++k])
+		{
+			if (tab[k][0] != '.')
+			{
+				ft_putstr(tab[k]);
+				ft_putchar('\n');
+			}
+		}
+		return ;
+	}
+	else if (i == 1)
+	{
+		while (tab[++k])
+		{
+			ft_putstr(tab[k]);
+			ft_putchar('\n');
+		}
+		return ;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 10:10:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/01/11 15:19:16 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/01/11 15:55:20 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int		create_current(t_all *all, int nbf, int nbd)
 		{
 			if (!(all->regf[a] = (char *)malloc(sizeof(char) * ft_strlen(all->ptr->d_name))))
 				return (-1);
-//			printf("FICHIER %s\n", all->ptr->d_name);
+			//			printf("FICHIER %s\n", all->ptr->d_name);
 			all->regf[a] = all->ptr->d_name;
 			a++;
 		}
@@ -86,7 +86,7 @@ int		create_current(t_all *all, int nbf, int nbd)
 		{
 			if (!(all->dir[b] = (char *)malloc(sizeof(char) * ft_strlen(all->ptr->d_name))))
 				return (-1);
-//			printf("DOSSIER %s\n", all->ptr->d_name);
+			//			printf("DOSSIER %s\n", all->ptr->d_name);
 			all->dir[b] = all->ptr->d_name;
 			b++;
 		}
@@ -96,6 +96,25 @@ int		create_current(t_all *all, int nbf, int nbd)
 	return(0);
 }
 
+int		ft_displays(t_all *all, int i)
+{
+	if (i == 0)
+	{
+		if (all->a > 0)
+		{
+			printdbchar(all->dir, 1);
+			printdbchar(all->regf, 1);
+		}
+		else
+		{
+			printdbchar(all->dir, 0);
+			printdbchar(all->regf, 0);
+		}
+		return (0);
+	}
+	return (0);
+}
+
 int main(int argc, char **argv)
 {
 	t_all	all;
@@ -103,22 +122,36 @@ int main(int argc, char **argv)
 
 	i = 1;
 	ft_init(&all);
-	if (argc == 1)
+	if (argc)
 	{
+		if (argc > 1 && argv[1][0] == '-')
+		{
+			if (get_arg(argv[1], &all) == -1)
+				return (ft_error(0, &all));
+		}
+		else if (argc > 1 && argv[1][0] != '-')
+		{
+			if (!(all.fd = (int *)malloc(sizeof(int) * (argc - 1))))
+				return (-1);
+			while (i < (argc))
+			{
+				all.fd[i - 1] = open(argv[i], O_RDONLY);
+				i++;
+			}
+			just_files(&all, argv, argc);
+			return (0);
+		}
 		ft_count_files(&all);
 		printf("nbr fichier =%d nbr dir =%d\n", all.nbrfile, all.nbrdir);
 		create_current(&all, all.nbrfile, all.nbrdir);
 		zeroac(&all);
-		ft_putstr("\n\nDOSSIER\n");
-		printdbchar(all.dir);
-		ft_putstr("\n\nFICHIER\n");
-		printdbchar(all.regf);
+		ft_displays(&all, 0);
 		return (0);
 	}
-	if (argv[1][0] != '-')
+/*	if (argv[1][0] != '-')
 	{
 		if (!(all.fd = (int *)malloc(sizeof(int) * (argc - 1))))
-		return (-1);
+			return (-1);
 		while (i < (argc))
 		{
 			all.fd[i - 1] = open(argv[i], O_RDONLY);
@@ -131,7 +164,7 @@ int main(int argc, char **argv)
 	{
 		if (get_arg(argv[1], &all) == -1)
 			return (ft_error(0, &all));
-//		data(argv, argc, &all);
-	}
+		//		data(argv, argc, &all);
+	}*/
 	return (0);
 }

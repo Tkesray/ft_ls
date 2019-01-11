@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 10:10:55 by prastoin          #+#    #+#             */
-/*   Updated: 2019/01/11 15:12:20 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/01/11 15:44:39 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct		s_data
 	int		nbrdir;
 }					t_all;
 
-void				printdbchar(char **tab);
+void				printdbchar(char **tab, int i);
 void				ft_init(t_all *all);
 int					ft_error(int i, t_all *all);
 int					just_files(t_all *all, char **argv, int argc);
