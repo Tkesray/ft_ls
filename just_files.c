@@ -1,39 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ls.h                                            :+:      :+:    :+:   */
+/*   just_files.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/11 10:10:55 by prastoin          #+#    #+#             */
-/*   Updated: 2019/01/11 12:54:58 by prastoin         ###   ########.fr       */
+/*   Created: 2019/01/11 12:53:10 by prastoin          #+#    #+#             */
+/*   Updated: 2019/01/11 12:55:00 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_LS_H
-#define FT_LS_H
+#include "ft_ls.h"
 
-# include "libft.h"
-# include <stdio.h>
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
-
-typedef struct		s_data
+int		just_files(t_all *all, char **argv, int argc)
 {
-	char	badchar;
-	char	*str;
-	char	*flag;
-	int		R;
-	int		l;
-	int		a;
-	int		r;
-	int		t;
-	int		*fd;
-}					t_all;
+	int	i;
 
-void				ft_init(t_all *all);
-int					ft_error(int i, t_all *all);
-int					just_files(t_all *all, char **argv, int argc);
-
-#endif
+	i = 0;
+	while (i < argc - 1)
+	{
+		if (all->fd[i] == -1)
+		{
+			ft_putstr("ls : ");
+			ft_putstr(argv[i + 1]);
+			ft_putstr(" No such file or directory\n");
+		}
+		else
+			ft_putstr(argv[i + 1]);
+		i++;
+	}
+	return (1);
+}

@@ -6,13 +6,13 @@
 #    By: prastoin <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/07 11:13:09 by prastoin          #+#    #+#              #
-#    Updated: 2019/01/11 11:26:51 by prastoin         ###   ########.fr        #
+#    Updated: 2019/01/11 12:52:17 by prastoin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ls
 
-SRC = main.c
+SRC = main.c tools.c zeroac.c just_files.c
 
 OBJ = $(SRC:.c=.o)
 

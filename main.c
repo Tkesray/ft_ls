@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 10:10:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/01/11 12:26:06 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/01/11 12:53:29 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,39 +39,24 @@ int		get_arg(char *str, t_all *all)
 	return (0);
 }
 
-int		just_files(char **argv, int argc)
+int		just_files(t_all *all, char **argv, int argc)
 {
 	int	i;
 
-	i = 1;
-	while (i < argc)
+	i = 0;
+	while (i < argc - 1)
 	{
-		ft_putstr(argv[i]);
+		if (all->fd[i] == -1)
+		{
+			ft_putstr("ls : ");
+			ft_putstr(argv[i + 1]);
+			ft_putstr(" No such file or directory\n");
+		}
+		else
+			ft_putstr(argv[i + 1]);
 		i++;
 	}
 	return (1);
-}
-
-void	ft_init(t_all *all)
-{
-	all->R = 0;
-	all->l = 0;
-	all->r = 0;
-	all->t = 0;
-	all->a = 0;
-	return ;
-}
-
-int		ft_error(int i, t_all *all)
-{
-	if (i == 0)
-	{
-		ft_putstr("ls: illegal option -- ");
-		ft_putchar(all->badchar);
-		ft_putstr("\nusage : ls [-Rlrta] [file ...]\n");
-		return (-1);
-	}
-	return (0);
 }
 
 int main(int argc, char **argv)
@@ -81,17 +66,20 @@ int main(int argc, char **argv)
 
 	i = 1;
 	ft_init(&all);
-	(void)argc;
+	if (argc == 1)
+	{
+		ft_ls()
+	}
 	if (argv[1][0] != '-')
 	{
 		if (!(all.fd = (int *)malloc(sizeof(int) * (argc - 1))))
 		return (-1);
-		while (i < (argc - 1))
+		while (i < (argc))
 		{
-			all.fd[i] = open(argv[i], O_RDONLY);
+			all.fd[i - 1] = open(argv[i], O_RDONLY);
 			i++;
 		}
-		just_files(argv, (argc - 1));
+		just_files(&all, argv, argc);
 		return (0);
 	}
 	else
