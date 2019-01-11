@@ -6,11 +6,23 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 12:52:35 by prastoin          #+#    #+#             */
-/*   Updated: 2019/01/11 12:54:24 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/01/11 15:13:15 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+void	printdbchar(char **tab)
+{
+	int	k;
+
+	k = -1;
+	while (tab[++k])
+	{
+		ft_putstr(tab[k]);
+		ft_putchar('\n');
+	}
+}
 
 void	ft_init(t_all *all)
 {
@@ -19,6 +31,7 @@ void	ft_init(t_all *all)
 	all->r = 0;
 	all->t = 0;
 	all->a = 0;
+	all->nbrfile = 0;
 	return ;
 }
 

@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 10:10:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/01/11 12:53:29 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/01/11 15:19:16 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,36 +39,81 @@ int		get_arg(char *str, t_all *all)
 	return (0);
 }
 
-int		just_files(t_all *all, char **argv, int argc)
+int		ft_count_files(t_all *all)
+{
+	if (!(all->fd2 = opendir((const char *)("."))))
+		return (-1);
+	while ((all->ptr = readdir(all->fd2)) != NULL)
+	{
+		if (all->ptr->d_type == DT_REG)
+			all->nbrfile++;
+		if (all->ptr->d_type == DT_DIR)
+			all->nbrdir++;
+	}
+	closedir(all->fd2);
+	return (1);
+}
+
+int		create_current(t_all *all, int nbf, int nbd)
 {
 	int	i;
+	int	a;
+	int	b;
 
+	b = 0;
+	a = 0;
 	i = 0;
-	while (i < argc - 1)
+	if (!(all->regf = (char **)malloc(sizeof(char *) * (nbf + 1))))
+		return (-1);
+	all->regf[nbf + 1] = NULL;
+	if (!(all->dir = (char **)malloc(sizeof(char *) * (nbd + 1))))
+		return (-1);
+	all->dir[nbd + 1] = NULL;
+	if (!(all->fd2 = opendir((const char *)("."))))
+		return (-1);
+	while (i < (nbf + nbd))
 	{
-		if (all->fd[i] == -1)
+		all->ptr = readdir(all->fd2);
+		if (all->ptr->d_type == DT_REG)
 		{
-			ft_putstr("ls : ");
-			ft_putstr(argv[i + 1]);
-			ft_putstr(" No such file or directory\n");
+			if (!(all->regf[a] = (char *)malloc(sizeof(char) * ft_strlen(all->ptr->d_name))))
+				return (-1);
+//			printf("FICHIER %s\n", all->ptr->d_name);
+			all->regf[a] = all->ptr->d_name;
+			a++;
 		}
-		else
-			ft_putstr(argv[i + 1]);
+		else if (all->ptr->d_type ==  DT_DIR)
+		{
+			if (!(all->dir[b] = (char *)malloc(sizeof(char) * ft_strlen(all->ptr->d_name))))
+				return (-1);
+//			printf("DOSSIER %s\n", all->ptr->d_name);
+			all->dir[b] = all->ptr->d_name;
+			b++;
+		}
 		i++;
 	}
-	return (1);
+	closedir(all->fd2);
+	return(0);
 }
 
 int main(int argc, char **argv)
 {
-	t_all all;
+	t_all	all;
 	int		i;
 
 	i = 1;
 	ft_init(&all);
 	if (argc == 1)
 	{
-		ft_ls()
+		ft_count_files(&all);
+		printf("nbr fichier =%d nbr dir =%d\n", all.nbrfile, all.nbrdir);
+		create_current(&all, all.nbrfile, all.nbrdir);
+		zeroac(&all);
+		ft_putstr("\n\nDOSSIER\n");
+		printdbchar(all.dir);
+		ft_putstr("\n\nFICHIER\n");
+		printdbchar(all.regf);
+		return (0);
 	}
 	if (argv[1][0] != '-')
 	{
@@ -86,8 +131,7 @@ int main(int argc, char **argv)
 	{
 		if (get_arg(argv[1], &all) == -1)
 			return (ft_error(0, &all));
-		else
-			return(0);
+//		data(argv, argc, &all);
 	}
 	return (0);
 }
