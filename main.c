@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 10:10:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/01/11 15:55:20 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/01/12 10:50:02 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,40 +96,62 @@ int		create_current(t_all *all, int nbf, int nbd)
 	return(0);
 }
 
-int		ft_displays(t_all *all, int i)
-{
-	if (i == 0)
-	{
-		if (all->a > 0)
-		{
-			printdbchar(all->dir, 1);
-			printdbchar(all->regf, 1);
-		}
-		else
-		{
-			printdbchar(all->dir, 0);
-			printdbchar(all->regf, 0);
-		}
-		return (0);
-	}
-	return (0);
-}
-
 int main(int argc, char **argv)
 {
 	t_all	all;
 	int		i;
+	int		y;
+	int		start;
 
+	start = 0;
+	y = 1;
 	i = 1;
 	ft_init(&all);
 	if (argc)
 	{
-		if (argc > 1 && argv[1][0] == '-')
+		if (argc > 1 && argv[1][0] == '-' && (ft_strlen(argv[1]) > 1))
 		{
-			if (get_arg(argv[1], &all) == -1)
-				return (ft_error(0, &all));
+			while (argv[y])
+			{
+				if (argv[y][0] == '-')
+				{
+					if (get_arg(argv[y], &all) == -1)
+						return (ft_error(0, &all));
+				}
+				else
+				{
+					all.onlyflags = -1;
+					break;
+				}
+				y++;
+			}
+			start = y - 1;
+			y = argc - 1;
+			printf("%d et %d\n", y, start);
+			if (all.onlyflags < 0)
+			{
+				while (y > start)
+				{
+					if ((all.df = open(argv[y], O_RDONLY)) < 0)
+					{
+						ft_putstr("ls : ");
+						ft_putstr(argv[y]);
+						ft_putstr(": No such file or directory\n");
+					}
+					else if (all.fd >= 0)
+					{
+						ft_putstr(argv[y]);
+						ft_putchar('\n');
+					}
+					y--;
+				}
+			}
+			else
+			{
+				print_ls(&all);
+			}
 		}
-		else if (argc > 1 && argv[1][0] != '-')
+		else if (argc > 1 && (argv[1][0] != '-' || argv[1][1] == '\0'))
 		{
 			if (!(all.fd = (int *)malloc(sizeof(int) * (argc - 1))))
 				return (-1);
@@ -141,30 +163,27 @@ int main(int argc, char **argv)
 			just_files(&all, argv, argc);
 			return (0);
 		}
-		ft_count_files(&all);
-		printf("nbr fichier =%d nbr dir =%d\n", all.nbrfile, all.nbrdir);
-		create_current(&all, all.nbrfile, all.nbrdir);
-		zeroac(&all);
-		ft_displays(&all, 0);
+		else if (argc == 1)
+			print_ls(&all);
 		return (0);
 	}
-/*	if (argv[1][0] != '-')
-	{
+	/*	if (argv[1][0] != '-')
+		{
 		if (!(all.fd = (int *)malloc(sizeof(int) * (argc - 1))))
-			return (-1);
+		return (-1);
 		while (i < (argc))
 		{
-			all.fd[i - 1] = open(argv[i], O_RDONLY);
-			i++;
+		all.fd[i - 1] = open(argv[i], O_RDONLY);
+		i++;
 		}
 		just_files(&all, argv, argc);
 		return (0);
-	}
-	else
-	{
+		}
+		else
+		{
 		if (get_arg(argv[1], &all) == -1)
-			return (ft_error(0, &all));
-		//		data(argv, argc, &all);
+		return (ft_error(0, &all));
+	//		data(argv, argc, &all);
 	}*/
 	return (0);
 }

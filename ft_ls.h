@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 10:10:55 by prastoin          #+#    #+#             */
-/*   Updated: 2019/01/11 15:44:39 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/01/12 10:47:09 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <fcntl.h>
 # include <dirent.h>
 
-typedef struct		s_data
+typedef struct		s_all
 {
 	char	badchar;
 	char	*str;
@@ -36,7 +36,10 @@ typedef struct		s_data
 	int		a;
 	int		r;
 	int		t;
+
 	int		*fd;
+	int		df;
+	int		onlyflags;
 
 	DIR		*fd2;
 	struct dirent *ptr;
@@ -50,5 +53,9 @@ int					ft_error(int i, t_all *all);
 int					just_files(t_all *all, char **argv, int argc);
 int					zeroac(t_all *all);
 int					data(char **argv, int argc, t_all *all);
+int					print_ls(t_all *all);
+int					ft_count_files(t_all *all);
+int					create_current(t_all *all, int nbf, int nbd);
+int					ft_displays(t_all *all, int i);
 
 #endif
