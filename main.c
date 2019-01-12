@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 10:10:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/01/12 13:15:50 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/01/12 13:45:14 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,8 @@ int main(int argc, char **argv)
 	y = 1;
 	i = 1;
 	ft_init(&all);
+	if (argc > 3)
+		ft_sort_params(argv);
 	if (argc)
 	{
 		if (argc > 1 && argv[1][0] == '-' && (ft_strlen(argv[1]) > 1))

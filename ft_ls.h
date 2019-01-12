@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 10:10:55 by prastoin          #+#    #+#             */
-/*   Updated: 2019/01/12 13:09:32 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/01/12 13:43:23 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,6 @@ int					create_current(t_all *all, int nbf, int nbd);
 int					ft_displays(t_all *all, int i);
 int					print_bad_files(t_all *all, int y, int start, char **argv);
 int					print_good_files(t_all *all, int y, int start, char **argv);
+char				**ft_sort_params(char **argv);
 
 #endif

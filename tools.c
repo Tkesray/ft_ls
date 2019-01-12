@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 12:52:35 by prastoin          #+#    #+#             */
-/*   Updated: 2019/01/12 11:32:31 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/01/12 13:55:13 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,26 @@ void	printdbchar(char **tab, int i)
 		}
 		return ;
 	}
+}
+
+char	**ft_sort_params(char **argv)
+{
+	int		i;
+	char	*swap;
+
+	i = 0;
+	while (argv[i + 1])
+	{
+		if (ft_strcmp(argv[i], argv[i + 1]) > 0 && argv[i])
+		{
+			swap = argv[i];
+			argv[i] = argv[i + 1];
+			argv[i + 1] = swap;
+			i = 0;
+		}
+		i++;
+	}
+	return (argv);
 }
 
 void	ft_init(t_all *all)
