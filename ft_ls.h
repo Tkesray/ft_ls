@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 10:10:55 by prastoin          #+#    #+#             */
-/*   Updated: 2019/01/12 10:47:09 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/01/12 13:09:32 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct		s_all
 	int		r;
 	int		t;
 
-	int		*fd;
+	int		*fd[2];
 	int		df;
 	int		onlyflags;
 
@@ -57,5 +57,7 @@ int					print_ls(t_all *all);
 int					ft_count_files(t_all *all);
 int					create_current(t_all *all, int nbf, int nbd);
 int					ft_displays(t_all *all, int i);
+int					print_bad_files(t_all *all, int y, int start, char **argv);
+int					print_good_files(t_all *all, int y, int start, char **argv);
 
 #endif

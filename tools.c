@@ -6,14 +6,16 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 12:52:35 by prastoin          #+#    #+#             */
-/*   Updated: 2019/01/12 10:47:34 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/01/12 11:32:31 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-/*int		ft_isafile(char *str)
+/*int		ft_isadir(char *str)
 {
+	DIR	*fd;
+	struct dirent *ptr;
 	
 }*/
 
