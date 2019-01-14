@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 10:40:54 by prastoin          #+#    #+#             */
-/*   Updated: 2019/01/14 11:38:14 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/01/14 13:45:12 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 int		print_ls(t_all *all)
 {
-	ft_count_files(all);
-//	create_current(all, all->nbrfile, all->nbrdir);
-	create_tab(all, all->nbrfile, all->nbrdir);
-	//	ft_sort_params(all->regf);
-//	ft_sort_params(all->dir);
-	ft_sort_params(all->tab, 0);
-	ft_displays(all, 2);
+	ft_count_files(all, ".");
+	while (nbrdir != 0)
+	{
+		create_tab(all, all->nbrfile, all->nbrdir);
+		ft_sort_params(all->tab, 0);
+		ft_displays(all, 2);
+	}
 	return (0);
 }
 
-int		print_bad_files(t_all *all, int y, int start, char **argv)
+/*int		print_bad_files(t_all *all, int y, int start, char **argv)
 {
 	while (y > start)
 	{
@@ -37,7 +37,7 @@ int		print_bad_files(t_all *all, int y, int start, char **argv)
 		y--;
 	}
 	return (0);
-}
+}*/
 
 int		print_good_files(t_all *all, int y, int start, char **argv)
 {

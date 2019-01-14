@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 10:10:37 by prastoin          #+#    #+#             */
-/*   Updated: 2019/01/14 12:35:05 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/01/14 13:43:25 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	ft_reset_flags(t_all *all)
 {
-		all->R = 0;
-		all->l = 0;
-		all->r = 0;
-		all->t = 0;
-		all->a = 0;
+	all->R = 0;
+	all->l = 0;
+	all->r = 0;
+	all->t = 0;
+	all->a = 0;
 }
 
 int		get_arg(char *str, t_all *all)
@@ -50,9 +50,9 @@ int		get_arg(char *str, t_all *all)
 	return (0);
 }
 
-int		ft_count_files(t_all *all)
+int		ft_count_files(t_all *all, const char *str)
 {
-	if (!(all->fd2 = opendir((const char *)("."))))
+	if (!(all->fd2 = opendir((str))))
 		return (-1);
 	while ((all->ptr = readdir(all->fd2)) != NULL)
 	{
@@ -66,45 +66,45 @@ int		ft_count_files(t_all *all)
 }
 
 /*int		create_current(t_all *all, int nbf, int nbd)
-{
-	int	i;
-	int	a;
-	int	b;
+  {
+  int	i;
+  int	a;
+  int	b;
 
-	b = 0;
-	a = 0;
-	i = 0;
-	if (!(all->regf = (char **)malloc(sizeof(char *) * (nbf + 1))))
-		return (-1);
-	all->regf[nbf] = NULL;
-	if (!(all->dir = (char **)malloc(sizeof(char *) * (nbd + 1))))
-		return (-1);
-	all->dir[nbd] = NULL;
-	if (!(all->fd2 = opendir((const char *)("."))))
-		return (-1);
-	while (i < (nbf + nbd))
-	{
-		all->ptr = readdir(all->fd2);
-		if (all->ptr->d_type == DT_REG)
-		{
-			if (!(all->regf[a] = (char *)malloc(sizeof(char) * (ft_strlen(all->ptr->d_name)))))
-				return (-1);
+  b = 0;
+  a = 0;
+  i = 0;
+  if (!(all->regf = (char **)malloc(sizeof(char *) * (nbf + 1))))
+  return (-1);
+  all->regf[nbf] = NULL;
+  if (!(all->dir = (char **)malloc(sizeof(char *) * (nbd + 1))))
+  return (-1);
+  all->dir[nbd] = NULL;
+  if (!(all->fd2 = opendir((const char *)("."))))
+  return (-1);
+  while (i < (nbf + nbd))
+  {
+  all->ptr = readdir(all->fd2);
+  if (all->ptr->d_type == DT_REG)
+  {
+  if (!(all->regf[a] = (char *)malloc(sizeof(char) * (ft_strlen(all->ptr->d_name)))))
+  return (-1);
 //			printf("FICHIER %s\n", all->ptr->d_name);
-			all->regf[a] = all->ptr->d_name;
-			a++;
-		}
-		else if (all->ptr->d_type ==  DT_DIR)
-		{
-			if (!(all->dir[b] = (char *)malloc(sizeof(char) * (ft_strlen(all->ptr->d_name)))))
-				return (-1);
+all->regf[a] = all->ptr->d_name;
+a++;
+}
+else if (all->ptr->d_type ==  DT_DIR)
+{
+if (!(all->dir[b] = (char *)malloc(sizeof(char) * (ft_strlen(all->ptr->d_name)))))
+return (-1);
 //			printf("DOSSIER %s\n", all->ptr->d_name);
-			all->dir[b] = all->ptr->d_name;
-			b++;
-		}
-		i++;
-	}
-	closedir(all->fd2);
-	return(0);
+all->dir[b] = all->ptr->d_name;
+b++;
+}
+i++;
+}
+closedir(all->fd2);
+return(0);
 }*/
 
 int main(int argc, char **argv)
@@ -118,11 +118,6 @@ int main(int argc, char **argv)
 	y = 1;
 	i = 1;
 	ft_init(&all);
-	if (argc > 3)
-		ft_sort_params(argv, 1);
-	int k = -1;
-	while (argv[++k])
-		printf("ARGV = %s\n", argv[k]);
 	if (argc)
 	{
 		if (argc > 1 && argv[1][0] == '-' && (ft_strlen(argv[1]) > 1))
@@ -143,9 +138,12 @@ int main(int argc, char **argv)
 			}
 			if (all.onlyflags < 0)
 			{
+				ft_sort_params(argv, (y - 1));
+/*				int k = -1;
+				while (argv[++k])
+					printf("ARGV = %s\n", argv[k]);*/
 				start = y - 1;
 				y = argc - 1;
-				print_bad_files(&all, y, start, argv);
 				just_files(&all, argv, argc, start + 1);
 				return (0);
 			}
@@ -167,11 +165,11 @@ int main(int argc, char **argv)
 }
 
 /*			int k;
-k = 0;
-while (k < argc - 1)
-{
-	printf("all.fd[0][%d] = %d\n", k, all.fd[0][k]);
-	printf("all.fd[1][%d] = %d\n", k, all.fd[1][k]);
-	k++;
-}*/
+			k = 0;
+			while (k < argc - 1)
+			{
+			printf("all.fd[0][%d] = %d\n", k, all.fd[0][k]);
+			printf("all.fd[1][%d] = %d\n", k, all.fd[1][k]);
+			k++;
+			}*/
 

@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 10:10:55 by prastoin          #+#    #+#             */
-/*   Updated: 2019/01/14 11:53:10 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/01/14 13:41:55 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int					just_files(t_all *all, char **argv, int argc, int start);
 int					zeroac(t_all *all);
 int					data(char **argv, int argc, t_all *all);
 int					print_ls(t_all *all);
-int					ft_count_files(t_all *all);
+int					ft_count_files(t_all *all, const char *str);
 int					create_current(t_all *all, int nbf, int nbd);
 int					ft_displays(t_all *all, int i);
 int					print_bad_files(t_all *all, int y, int start, char **argv);

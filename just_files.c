@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 12:53:10 by prastoin          #+#    #+#             */
-/*   Updated: 2019/01/14 12:29:17 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/01/14 13:29:13 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ int		just_files_display(t_all *all, char **argv, int argc, int start)
 	reading = 0;
 	save = 0;
 	i = start;
-/*	printf("BAD = %d\n", ft_count_bfd(all->fd, 0, argc - 1));
-	printf("FILE = %d\n", ft_count_bfd(all->fd, 1, argc - 1));*/
-//	printf("DIR = %d\n", ft_count_bfd(all->fd, 2, argc - 1));
+	/*	printf("BAD = %d\n", ft_count_bfd(all->fd, 0, argc - 1));
+		printf("FILE = %d\n", ft_count_bfd(all->fd, 1, argc - 1));*/
+	//	printf("DIR = %d\n", ft_count_bfd(all->fd, 2, argc - 1));
 	while (i < argc)
 	{
-//		printf("argv[i] = %s\n", argv[i]);
+		//		printf("argv[i] = %s\n", argv[i]);
 		if (all->fd[0][j] == -1)
 		{
 			save = 1;
@@ -70,7 +70,7 @@ int		just_files_display(t_all *all, char **argv, int argc, int start)
 	i = start;
 	while (i < argc)
 	{
-//		printf("argv[i] = %s\n", argv[i]);
+		//		printf("argv[i] = %s\n", argv[i]);
 		if (all->fd[0][j] > 0 && all->fd[1][j] == -1)
 		{
 			save = 1;
@@ -84,7 +84,7 @@ int		just_files_display(t_all *all, char **argv, int argc, int start)
 	i = start;
 	while (i < argc)
 	{
-//		printf("argv[i] = %s\n", argv[i]);
+		//		printf("argv[i] = %s\n", argv[i]);
 		if (all->fd[0][j] > 0 && all->fd[1][j] == 1)
 		{
 			if (save == 1)
@@ -100,10 +100,18 @@ int		just_files_display(t_all *all, char **argv, int argc, int start)
 			all->fd2 = opendir((const char *)argv[i]);
 			while ((all->ptr = readdir(all->fd2)) != NULL)
 			{
-				if(all->ptr->d_name[0] != '.')
+				if (all->a > 0)
 				{
 					ft_putstr(all->ptr->d_name);
 					ft_putchar('\n');
+				}
+				else
+				{
+					if (all->ptr->d_name[0] != '.')
+					{
+						ft_putstr(all->ptr->d_name);
+						ft_putchar('\n');
+					}
 				}
 			}
 			reading++;
@@ -130,7 +138,7 @@ int		just_files(t_all *all, char **argv, int argc, int start)
 		return (-1);
 	while (i < (argc))
 	{
-//		printf("%s\n", argv[i]);
+		//		printf("%s\n", argv[i]);
 		if (!(all->fd2 = opendir((const char *)argv[i])))
 			all->fd[1][j] = -1;
 		else
@@ -142,8 +150,8 @@ int		just_files(t_all *all, char **argv, int argc, int start)
 		i++;
 		j++;
 	}
-//	printf("all->fd[0][1] = %d et all->fd[1][0] = %d\n", all->fd[0][0], all->fd[1][0]);
-//	printf("all->fd[0][1] = %d et all->fd[1][1] = %d\n", all->fd[0][1], all->fd[1][1]);
+	//	printf("all->fd[0][1] = %d et all->fd[1][0] = %d\n", all->fd[0][0], all->fd[1][0]);
+	//	printf("all->fd[0][1] = %d et all->fd[1][1] = %d\n", all->fd[0][1], all->fd[1][1]);
 	just_files_display(all, argv, argc, start);
 	return (0);
 }
