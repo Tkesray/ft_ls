@@ -1,21 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   data.c                                             :+:      :+:    :+:   */
+/*   ft_sort_params.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/11 13:17:14 by prastoin          #+#    #+#             */
-/*   Updated: 2019/01/11 13:29:26 by prastoin         ###   ########.fr       */
+/*   Created: 2019/01/14 10:43:38 by prastoin          #+#    #+#             */
+/*   Updated: 2019/01/14 12:32:34 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "libft.h"
 
-/*int		data(char **argv, int argc, t_all *all)
+char	**ft_sort_params(char **argv, int k)
 {
-	if (all->R > 0)
+	int		i;
+	char	*swap;
+
+	i = k;
+	while (argv[i + 1])
 	{
-		
+		if (ft_strcmp(argv[i], argv[i + 1]) > 0 && argv[i])
+		{
+			swap = argv[i];
+			argv[i] = argv[i + 1];
+			argv[i + 1] = swap;
+			i = k;
+		}
+		i++;
 	}
-}*/
+	return (argv);
+}

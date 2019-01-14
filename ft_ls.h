@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 10:10:55 by prastoin          #+#    #+#             */
-/*   Updated: 2019/01/12 13:43:23 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/01/14 11:53:10 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ typedef struct		s_all
 
 	char	**dir;
 	char	**regf;
+	char	**tab;
+	int		*data;
 
 	char	*flag;
 	int		R;
@@ -47,10 +49,11 @@ typedef struct		s_all
 	int		nbrdir;
 }					t_all;
 
+int					create_tab(t_all *all, int nbf, int nbd);
 void				printdbchar(char **tab, int i);
 void				ft_init(t_all *all);
 int					ft_error(int i, t_all *all);
-int					just_files(t_all *all, char **argv, int argc);
+int					just_files(t_all *all, char **argv, int argc, int start);
 int					zeroac(t_all *all);
 int					data(char **argv, int argc, t_all *all);
 int					print_ls(t_all *all);
@@ -59,6 +62,5 @@ int					create_current(t_all *all, int nbf, int nbd);
 int					ft_displays(t_all *all, int i);
 int					print_bad_files(t_all *all, int y, int start, char **argv);
 int					print_good_files(t_all *all, int y, int start, char **argv);
-char				**ft_sort_params(char **argv);
 
 #endif

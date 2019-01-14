@@ -6,7 +6,7 @@
 /*   By: prastoin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 12:52:35 by prastoin          #+#    #+#             */
-/*   Updated: 2019/01/12 13:55:13 by prastoin         ###   ########.fr       */
+/*   Updated: 2019/01/14 11:11:55 by prastoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,13 @@ int		ft_displays(t_all *all, int i)
 		}
 		return (0);
 	}
+	if (i == 2)
+	{
+		if (all->a > 0)
+			printdbchar(all->tab, 1);
+		else
+			printdbchar(all->tab, 0);
+	}
 	return (0);
 }
 
@@ -42,48 +49,30 @@ void	printdbchar(char **tab, int i)
 {
 	int	k;
 
-	k = -1;
+	k = 0;
 	if (i == 0)
 	{
-		while (tab[++k])
+		while (tab[k])
 		{
 			if (tab[k][0] != '.')
 			{
 				ft_putstr(tab[k]);
 				ft_putchar('\n');
 			}
+			k++;
 		}
 		return ;
 	}
 	else if (i == 1)
 	{
-		while (tab[++k])
+		while (tab[k])
 		{
 			ft_putstr(tab[k]);
 			ft_putchar('\n');
+			k++;
 		}
 		return ;
 	}
-}
-
-char	**ft_sort_params(char **argv)
-{
-	int		i;
-	char	*swap;
-
-	i = 0;
-	while (argv[i + 1])
-	{
-		if (ft_strcmp(argv[i], argv[i + 1]) > 0 && argv[i])
-		{
-			swap = argv[i];
-			argv[i] = argv[i + 1];
-			argv[i + 1] = swap;
-			i = 0;
-		}
-		i++;
-	}
-	return (argv);
 }
 
 void	ft_init(t_all *all)

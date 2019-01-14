@@ -6,13 +6,13 @@
 #    By: prastoin <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/07 11:13:09 by prastoin          #+#    #+#              #
-#    Updated: 2019/01/12 11:29:40 by prastoin         ###   ########.fr        #
+#    Updated: 2019/01/14 11:49:29 by prastoin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ls
 
-SRC = main.c tools.c just_files.c data.c print_ls.c
+SRC = main.c tools.c just_files.c print_ls.c create_tab.c
 
 OBJ = $(SRC:.c=.o)
 
